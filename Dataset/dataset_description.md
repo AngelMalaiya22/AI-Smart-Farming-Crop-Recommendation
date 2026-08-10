@@ -1,123 +1,49 @@
-# Enhanced Crop Recommendation Dataset
+# Dataset
 
-## Overview
+This folder contains the datasets used for the **Crop Recommendation** module of the AI Smart Farming Assistant project.
 
-The **Enhanced Crop Recommendation Dataset** is an improved version of a publicly available crop recommendation dataset obtained from Kaggle (MIT License). The dataset was enhanced through feature engineering to better represent real-world agricultural conditions for machine learning-based crop recommendation systems.
+The datasets are maintained in different stages to keep the data preparation and machine learning workflow organized.
 
-The primary objective of this dataset is to predict the most suitable crop based on soil characteristics, environmental conditions, and geographical information.
+## 📂 Dataset Files
 
----
+### 1. `original_dataset.csv`
 
-## Dataset Source
+The original dataset collected from Kaggle. It contains the raw agricultural features and crop-related information before any modifications or feature engineering.
 
-- **Original Dataset:** Crop and Soil Dataset
-- **Source:** Kaggle
-- **License:** MIT License
+### 2. `enhanced_dataset.xlsx`
 
----
+The enhanced version of the original dataset.
 
-## Dataset Enhancements
+Changes made during dataset engineering include:
+- Removal of unnecessary features
+- Addition of the `Soil_Type` feature
+- Manual rule-based assignment of soil types using agricultural context such as **Season, Region, Crop Type, and Soil Texture**
 
-The original dataset was modified to improve its usefulness for crop recommendation research.
+This is the finalized dataset used as the basis for the Crop Recommendation model.
 
-### Added Feature
+### 3. `encoded_dataset.csv`
 
-A new feature named **Soil_Type** was introduced using **Rule-Based Feature Engineering**.
+The processed version of the enhanced dataset prepared for machine learning.
 
-The original dataset contained **Soil_Texture** (Clay, Sandy, Silt, Loamy) but did not contain geographical soil types such as Black Soil, Alluvial Soil, Red Soil, Laterite Soil, Desert Soil, Mountain Soil, Marshy Soil, and Alkaline Soil.
+It contains:
+- Selected relevant features
+- One-Hot Encoded categorical features
+- Label Encoded `Crop_Type` target
+- Features removed during feature selection
 
-The **Soil_Type** feature was manually assigned by considering the combination of:
+This dataset is used as the input for the **model training stage**.
 
-- Crop Type
-- Season
-- Region
-- Soil Texture
+## 🔄 Dataset Workflow
 
-Agricultural domain knowledge was used to determine the most suitable soil type for each agricultural scenario.
-
-This engineered feature enhances the agricultural representation of the dataset and enables experimentation with the impact of soil type on crop recommendation performance.
-
----
-
-## Features
-
-| Feature | Description |
-|----------|-------------|
-| N | Nitrogen content in soil |
-| P | Phosphorus content in soil |
-| K | Potassium content in soil |
-| Soil_pH | Soil pH value |
-| Soil_Moisture | Moisture content of soil |
-| Organic_Carbon | Organic carbon present in soil |
-| Temperature | Average temperature (°C) |
-| Humidity | Relative humidity (%) |
-| Rainfall | Rainfall (mm) |
-| Sunlight_Hours | Daily sunlight hours |
-| Season | Agricultural season (Kharif, Rabi, Zaid) |
-| Soil_Texture | Physical texture of soil (Clay, Sandy, Silt, Loamy) |
-| Region | Broad geographical region of India |
-| Soil_Type | Engineered feature representing the most suitable soil type |
-| Crop_Type | Target variable (Recommended Crop) |
-
----
-
-## Target Variable
-
-**Crop_Type**
-
-The machine learning models are trained to predict the most suitable crop based on the input soil and environmental parameters.
-
----
-
-## Feature Engineering
-
-The following feature was engineered:
-
-### Soil_Type
-
-**Technique Used:**
-- Rule-Based Feature Engineering
-
-**Methodology:**
-- Manual assignment using agricultural domain knowledge
-- Considered:
-  - Crop Type
-  - Season
-  - Region
-  - Soil Texture
-
-The engineered soil type represents the most suitable soil type for the given agricultural conditions rather than a directly measured field observation.
-
----
-
-## Intended Use
-
-This dataset is designed for:
-
-- Crop Recommendation Systems
-- Machine Learning Research
-- Explainable AI (XAI)
-- Agricultural Decision Support Systems
-- Feature Engineering Studies
-- Classification Models
-
----
-
-## Future Scope
-
-Future versions of the dataset may include:
-
-- State
-- District
-- GPS Coordinates
-- Soil Health Card Parameters
-- Weather API Integration
-- Real-time Environmental Data
-
----
-
-## License
-
-The original dataset is licensed under the **MIT License**.
-
-This enhanced version preserves the original license while including additional feature engineering performed for research and educational purposes.
+```text
+original_dataset.csv
+        ↓
+Data Cleaning & Feature Engineering
+        ↓
+enhanced_dataset.xlsx
+        ↓
+Feature Selection & Encoding
+        ↓
+encoded_dataset.csv
+        ↓
+Model Training
