@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+
+    <div class="header">
+        <h1>🌾 AI Crop Recommendation System</h1>
+        <p>Enter your soil and climate conditions to get a crop recommendation</p>
+    </div>
+
+    <form method="POST" action="/">
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label>Nitrogen (N)</label>
+                <input type="number" step="any" name="N"
+                       value="{{ form_data.get('N', '') }}"
+                       placeholder="e.g. 90" required>
+                <span class="hint">Range: 0 – 140</span>
+            </div>
+
+            <div class="form-group">
+                <label>Phosphorus (P)</label>
+                <input type="number" step="any" name="P"
+                       value="{{ form_data.get('P', '') }}"
+                       placeholder="e.g. 42" required>
+                <span class="hint">Range: 5 – 145</span>
+            </div>
+
+            <div class="form-group">
+                <label>Potassium (K)</label>
+                <input type="number" step="any" name="K"
+                       value="{{ form_data.get('K', '') }}"
+                       placeholder="e.g. 43" required>
+                <span class="hint">Range: 5 – 205</span>
+            </div>
+
+            <div class="form-group">
+                <label>Temperature (°C)</label>
+                <input type="number" step="any" name="temperature"
+                       value="{{ form_data.get('temperature', '') }}"
+                       placeholder="e.g. 25.5" required>
+                <span class="hint">Range: 8.8 – 43.7</span>
+            </div>
+
+            <div class="form-group">
+                <label>Humidity (%)</label>
+                <input type="number" step="any" name="humidity"
+                       value="{{ form_data.get('humidity', '') }}"
+                       placeholder="e.g. 80.5" required>
+                <span class="hint">Range: 14.3 – 100</span>
+            </div>
+
+            <div class="form-group">
+                <label>Soil pH</label>
+                <input type="number" step="any" name="ph"
+                       value="{{ form_data.get('ph', '') }}"
+                       placeholder="e.g. 6.5" required>
+                <span class="hint">Range: 3.5 – 9.9</span>
+            </div>
+
+            <div class="form-group full-width">
+                <label>Rainfall (mm)</label>
+                <input type="number" step="any" name="rainfall"
+                       value="{{ form_data.get('rainfall', '') }}"
+                       placeholder="e.g. 200" required>
+                <span class="hint">Range: 20.2 – 298.6</span>
+            </div>
+
+        </div>
+
+        <button type="submit">🔍 Recommend Crop</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result success">
+        <h2>✅ Recommended Crop</h2>
+        <div class="crop-name">{{ prediction }}</div>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="result error">
+        <h2>⚠️ Error</h2>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+</div>
+</body>
+</html>
