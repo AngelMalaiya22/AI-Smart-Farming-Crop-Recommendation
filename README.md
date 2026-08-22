@@ -1,218 +1,238 @@
-# 🌱 AI Smart Farming Assistant – Crop Recommendation System
+# 🌾 AI Smart Farming Assistant — Crop Recommendation System
 
-An AI-powered Crop Recommendation System that suggests the most suitable crop based on soil properties, weather conditions, season, and regional information using Machine Learning.
+> **Module 1 of 3** | AI Smart Farming Assistant Project  
+> B.Tech Computer Science Engineering (AI & ML) — Sharda University, Greater Noida
 
----
-
-## 📖 Overview
-
-Agriculture plays a vital role in food production, and selecting the right crop is essential for maximizing yield and minimizing resource wastage. This project uses Machine Learning to analyze agricultural parameters and recommend the most suitable crop for cultivation.
-
-The system is designed to assist farmers, researchers, and agricultural professionals in making data-driven decisions for sustainable farming.
-
----
-
-## 🎯 Objectives
-
-- Recommend the most suitable crop for cultivation.
-- Improve farming decisions using Machine Learning.
-- Reduce the risk of selecting unsuitable crops.
-- Promote sustainable and precision agriculture.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Render.com-2E7D32?style=for-the-badge&logo=render)](https://crop-recommendation-system-bfze.onrender.com/)
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-Web%20App-000000?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org/)
+[![Accuracy](https://img.shields.io/badge/RF%20Accuracy-99.55%25-brightgreen?style=for-the-badge)]()
 
 ---
 
-## ✨ Features
+## 📌 Project Overview
 
-- 🌱 Crop recommendation using Machine Learning
-- 🌍 Region-wise crop prediction
-- 🌦️ Season-aware recommendations
-- 🏞️ Soil property analysis
-- 📊 Data preprocessing and feature engineering
-- 🤖 Model training and evaluation
-- 📈 Prediction with high accuracy
+An AI-powered Crop Recommendation System that suggests the most suitable crop for cultivation based on soil nutrient levels and environmental conditions. The system uses machine learning classifiers trained on the [Crop Recommendation Dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset) and is deployed as a real-time web application accessible to farmers.
 
----
+This is **Module 1** of a three-module AI Smart Farming Assistant:
 
-## 🧠 Machine Learning Workflow
-
-1. Data Collection
-2. Data Cleaning
-3. Exploratory Data Analysis (EDA)
-4. Feature Engineering
-5. Model Training
-6. Model Evaluation
-7. Crop Prediction
+| Module | Description | Status |
+|--------|-------------|--------|
+| **Module 1** | Crop Recommendation System | ✅ Complete |
+| **Module 2** | Plant Disease Prediction | 🔜 Upcoming |
+| **Module 3** | Weed Detection | 🔜 Upcoming |
 
 ---
 
-## 📂 Project Structure
+## 🌐 Live Demo
+
+🔗 **[https://crop-recommendation-system-bfze.onrender.com/](https://crop-recommendation-system-bfze.onrender.com/)**
+
+Enter your soil and climate values → Get an instant crop recommendation.
+
+---
+
+## 📊 Model Performance
+
+Six machine learning algorithms were evaluated using stratified train-test split and **5-fold stratified cross-validation**:
+
+| Rank | Model | Test Accuracy | CV Accuracy (Mean ± Std) |
+|------|-------|--------------|--------------------------|
+| 🥇 1 | **Random Forest** | **99.55%** | **99.50% ± 0.30%** |
+| 2 | Decision Tree | 99.09% | 98.50% ± 0.37% |
+| 3 | SVM | 99.09% | 98.73% ± 0.37% |
+| 4 | XGBoost | 99.09% | 99.36% ± 0.39% |
+| 5 | Logistic Regression | 98.41% | 98.09% ± 0.37% |
+| 6 | KNN | 98.18% | 97.09% ± 0.62% |
+
+**Random Forest** was selected as the final deployment model based on highest test accuracy, stable cross-validation performance, and interpretable feature importances.
+
+---
+
+## 🌱 Input Features
+
+| Feature | Description | Unit |
+|---------|-------------|------|
+| N | Nitrogen content in soil | ppm |
+| P | Phosphorus content in soil | ppm |
+| K | Potassium content in soil | ppm |
+| Temperature | Ambient temperature | °C |
+| Humidity | Relative humidity | % |
+| pH | Soil pH value | — |
+| Rainfall | Annual rainfall | mm |
+
+**Target:** Crop Type (22 classes: rice, maize, chickpea, kidneybeans, pigeonpeas, mothbeans, mungbean, blackgram, lentil, pomegranate, banana, mango, grapes, watermelon, muskmelon, apple, orange, papaya, coconut, cotton, jute, coffee)
+
+---
+
+## 🗂️ Repository Structure
 
 ```
 AI-Smart-Farming-Crop-Recommendation/
 │
-├── dataset/
-│   └── Agricultural Dataset
+├── Dataset/
+│   ├── Crop_recommendation.csv          # Original Ingle dataset (2,200 records)
+│   └── Crop_recommendation_encoded.csv  # Label-encoded version
 │
-├── notebooks/
-│   └── Data Analysis.ipynb
+├── Models/
+│   ├── crop_rf_model.pkl                # Trained Random Forest model
+│   └── label_encoder.pkl               # LabelEncoder for inverse transform
 │
-├── src/
-│   ├── preprocessing.py
-│   ├── train.py
-│   ├── predict.py
-│   └── app.py
+├── Notebooks/
+│   ├── 01_DataPreprocessing.ipynb       # Data loading, cleaning, quality checks
+│   ├── 02_EDA.ipynb                     # Exploratory data analysis & visualizations
+│   ├── 03_Encoding.ipynb                # Label encoding of target variable
+│   ├── 04_ModelTraining.ipynb           # Training & evaluation of all 6 models
+│   ├── 05_CrossValidation.ipynb         # 5-fold stratified cross-validation
+│   ├── 06_HyperparameterTuning.ipynb    # RandomizedSearchCV on Random Forest
+│   └── 07_SaveModel.ipynb               # Serialize and verify final model
 │
-├── models/
-│   └── Trained Model
+├── WebApp/
+│   ├── app.py                           # Flask backend
+│   ├── templates/
+│   │   └── index.html                   # Frontend HTML form
+│   └── static/
+│       └── style.css                    # Styling
 │
-├── images/
-│
-├── requirements.txt
-├── README.md
-└── LICENSE
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 📊 Input Parameters
+## 🔬 Methodology
 
-The model uses agricultural parameters such as:
-
-| Feature | Description |
-|----------|-------------|
-| Nitrogen (N) | Soil Nitrogen Content |
-| Phosphorus (P) | Soil Phosphorus Content |
-| Potassium (K) | Soil Potassium Content |
-| Temperature | Temperature (°C) |
-| Humidity | Relative Humidity (%) |
-| Rainfall | Rainfall (mm) |
-| pH | Soil pH |
-| Season | Kharif / Rabi / Zaid |
-| Soil Texture | Sandy, Clay, Loamy, etc. |
-| Region | Indian Region |
-
----
-
-## 🎯 Output
-
-The system predicts:
-
-- Recommended Crop
-- Prediction Confidence (Optional)
-- Suitable Farming Conditions (Future Enhancement)
-
----
-
-## 🛠️ Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
-- Jupyter Notebook
-- Git
-- GitHub
-
----
-
-## 🤖 Machine Learning Models
-
-The following models will be explored and compared:
-
-- Decision Tree
-- Random Forest
-- XGBoost
-- Support Vector Machine (SVM)
-- K-Nearest Neighbors (KNN)
-
-The best-performing model will be selected based on evaluation metrics.
-
----
-
-## 📈 Evaluation Metrics
-
-- Accuracy
-- Precision
-- Recall
-- F1-Score
-- Confusion Matrix
-- Cross Validation Score
-
----
-
-## 🚀 Getting Started
-
-### Clone the repository
-
-```bash
-git clone https://github.com/<your-username>/AI-Smart-Farming-Crop-Recommendation.git
+```
+Dataset Collection (2,200 records × 7 features × 22 crops)
+        ↓
+Data Preprocessing (null check · duplicates · dtype validation)
+        ↓
+Exploratory Data Analysis (distributions · correlation · boxplots)
+        ↓
+Label Encoding (22 crop classes → integers 0–21)
+        ↓
+Stratified Train-Test Split (80% train | 20% test | stratify=y)
+        ↓
+Feature Scaling (StandardScaler — fitted on train only, no leakage)
+        ↓
+Model Training — 6 Classifiers (RF · DT · XGBoost · SVM · LR · KNN)
+        ↓
+5-Fold Stratified Cross-Validation + Hyperparameter Tuning
+        ↓
+Best Model Selection → Random Forest (99.55% accuracy)
+        ↓
+Deployment → Flask Web App on Render.com
 ```
 
-### Navigate to the project
+---
 
+## 🧠 Feature Importance (Random Forest)
+
+| Rank | Feature | Importance |
+|------|---------|-----------|
+| 1 | Humidity | 24.04% |
+| 2 | Potassium (K) | 19.83% |
+| 3 | Rainfall | 18.72% |
+| 4 | Phosphorus (P) | 15.24% |
+| 5 | Nitrogen (N) | 15.02% |
+| 6 | Temperature | 5.06% |
+| 7 | Soil pH | 2.91% |
+
+Humidity, potassium, and rainfall together account for **62.6%** of total predictive importance — consistent with established agronomic principles.
+
+---
+
+## 🚀 Run Locally
+
+### Prerequisites
 ```bash
+pip install flask scikit-learn xgboost joblib pandas numpy
+```
+
+### Steps
+```bash
+# 1. Clone the repository
+git clone https://github.com/AngelMalaiya22/AI-Smart-Farming-Crop-Recommendation.git
 cd AI-Smart-Farming-Crop-Recommendation
-```
 
-### Install dependencies
+# 2. Run the Flask app
+cd WebApp
+python app.py
 
-```bash
-pip install -r requirements.txt
-```
-
-### Run the project
-
-```bash
-python src/app.py
+# 3. Open in browser
+# http://127.0.0.1:5000
 ```
 
 ---
 
-## 📌 Future Improvements
+## 🧪 Test the Model
 
-- Web Application
-- Mobile Application
-- Real-time Weather API Integration
-- Soil Image Analysis
-- Fertilizer Recommendation
-- Irrigation Recommendation
-- Multi-language Support
+Use these sample inputs to verify the system:
+
+| Crop | N | P | K | Temp | Humidity | pH | Rainfall |
+|------|---|---|---|------|----------|----|----------|
+| Rice | 90 | 42 | 43 | 20.87 | 82.00 | 6.50 | 202.93 |
+| Apple | 21 | 47 | 45 | 21.00 | 92.00 | 6.00 | 112.00 |
+| Coffee | 104 | 18 | 30 | 23.60 | 60.40 | 6.80 | 140.90 |
+| Maize | 77 | 48 | 22 | 22.61 | 82.63 | 6.26 | 84.76 |
 
 ---
 
-## 📸 Screenshots
+## 🛠️ Tech Stack
 
-_Add screenshots after developing the application._
+| Layer | Technology |
+|-------|-----------|
+| Language | Python 3.12 |
+| ML Library | scikit-learn, XGBoost |
+| Data Processing | pandas, NumPy |
+| Visualization | matplotlib, seaborn |
+| Web Framework | Flask |
+| Frontend | HTML5, CSS3 |
+| Model Serialization | joblib |
+| Deployment | Render.com |
+| Development | Jupyter Notebook (Anaconda) |
+
+---
+
+## 📄 Research Paper
+
+This project is accompanied by a research paper submitted for journal publication:
+
+> **"Comparative Evaluation of Machine Learning Algorithms for Crop Recommendation Using Soil and Environmental Parameters"**  
+> Angel Malaiya¹, Dr. Shree Harsh Attri¹  
+> ¹Department of Computer Science Engineering, Sharda University, Greater Noida, India
 
 ---
 
 ## 📚 Dataset
 
-The dataset contains agricultural information including soil nutrients, weather conditions, seasons, regional data, and crop labels.
-
-*(Dataset source will be added after publication.)*
-
----
-
-## 👩‍💻 Author
-
-**Angel**
-
-B.Tech Computer Science Engineering (AI & ML)
-
-Machine Learning Enthusiast
+- **Source:** [Crop Recommendation Dataset — Atharva Ingle, Kaggle](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
+- **Records:** 2,200
+- **Classes:** 22 crops
+- **Features:** 7 numerical input features
+- **Class Balance:** Perfectly balanced (100 samples per class)
 
 ---
 
-## 📄 License
+## 👤 Author
 
-This project is licensed under the MIT License.
+**Angel Malaiya**  
+B.Tech CSE (Artificial Intelligence & Machine Learning)  
+Sharda University, Greater Noida, India  
+📧 2025222124.angel@ug.sharda.ac.in
+
+**Dr. Shree Harsh Attri** *(Project Guide)*  
+Associate Professor, Department of Computer Science Engineering  
+Sharda University, Greater Noida, India  
+📧 shree.harsh@sharda.ac.in
 
 ---
 
-## ⭐ Support
+## 📜 License
 
-If you find this project helpful, consider giving it a ⭐ on GitHub!
+This project is open-source and available under the [MIT License](LICENSE).
 
-Happy Coding! 🌱
+---
+
+*Part of the AI Smart Farming Assistant — a multi-module academic project at Sharda University.*
