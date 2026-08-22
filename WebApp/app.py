@@ -6,8 +6,8 @@ import os
 app = Flask(__name__)
 
 BASE  = os.path.dirname(os.path.abspath(__file__))
-model = joblib.load(os.path.join(BASE, '..', 'models', 'crop_rf_model.pkl'))
-le    = joblib.load(os.path.join(BASE, '..', 'models', 'label_encoder.pkl'))
+model = joblib.load(os.path.join(BASE, '..', 'Models', 'crop_rf_model.pkl'))
+le    = joblib.load(os.path.join(BASE, '..', 'Models', 'label_encoder.pkl'))
 
 FEATURES = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']
 
